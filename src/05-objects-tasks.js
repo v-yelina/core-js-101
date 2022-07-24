@@ -6,7 +6,6 @@
  *                                                                                                *
  ************************************************************************************************ */
 
-
 /**
  * Returns the rectangle object with width and height parameters and getArea() method
  *
@@ -20,10 +19,15 @@
  *    console.log(r.height);      // => 20
  *    console.log(r.getArea());   // => 200
  */
-function Rectangle(/* width, height */) {
-  throw new Error('Not implemented');
+function Rectangle(width, height) {
+  return {
+    width,
+    height,
+    getArea() {
+      return this.width * this.height;
+    },
+  };
 }
-
 
 /**
  * Returns the JSON representation of specified object
@@ -35,10 +39,9 @@ function Rectangle(/* width, height */) {
  *    [1,2,3]   =>  '[1,2,3]'
  *    { width: 10, height : 20 } => '{"height":10,"width":20}'
  */
-function getJSON(/* obj */) {
-  throw new Error('Not implemented');
+function getJSON(obj) {
+  return JSON.stringify(obj);
 }
-
 
 /**
  * Returns the object of specified type from JSON representation
@@ -51,10 +54,12 @@ function getJSON(/* obj */) {
  *    const r = fromJSON(Circle.prototype, '{"radius":10}');
  *
  */
-function fromJSON(/* proto, json */) {
-  throw new Error('Not implemented');
+function fromJSON(proto, json) {
+  const props = JSON.parse(json);
+  const resObj = Object.create(proto);
+  Object.assign(resObj, props);
+  return resObj;
 }
-
 
 /**
  * Css selectors builder
@@ -139,7 +144,41 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 };
+// const cssSelectorBuilder = {
+//   resultSelector: '',
 
+//   element(value) {
+//     this.resultSelector += value;
+//   },
+
+//   id(value) {
+//     this.resultSelector += `#${value}`;
+//   },
+
+//   class(value) {
+//     this.resultSelector += `.${value}`;
+//   },
+
+//   attr(value) {
+//     this.resultSelector += `[${value}]`;
+//   },
+
+//   pseudoClass(value) {
+//     this.resultSelector += `:${value}`;
+//   },
+
+//   pseudoElement(value) {
+//     this.resultSelector += `::${value}`;
+//   },
+
+//   combine(selector1, combinator, selector2) {
+//     throw new Error('Not implemented');
+//   },
+
+//   stringify() {
+//     return this.resultSelector;
+//   },
+// };
 
 module.exports = {
   Rectangle,
