@@ -144,41 +144,6 @@ const cssSelectorBuilder = {
     throw new Error('Not implemented');
   },
 };
-// const cssSelectorBuilder = {
-//   resultSelector: '',
-
-//   element(value) {
-//     this.resultSelector += value;
-//   },
-
-//   id(value) {
-//     this.resultSelector += `#${value}`;
-//   },
-
-//   class(value) {
-//     this.resultSelector += `.${value}`;
-//   },
-
-//   attr(value) {
-//     this.resultSelector += `[${value}]`;
-//   },
-
-//   pseudoClass(value) {
-//     this.resultSelector += `:${value}`;
-//   },
-
-//   pseudoElement(value) {
-//     this.resultSelector += `::${value}`;
-//   },
-
-//   combine(selector1, combinator, selector2) {
-//     throw new Error('Not implemented');
-//   },
-
-//   stringify() {
-//     return this.resultSelector;
-//   },
-// };
 
 module.exports = {
   Rectangle,

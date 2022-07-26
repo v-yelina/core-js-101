@@ -341,8 +341,28 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  if (str.length === 0) {
+    return true;
+  }
+  const stack = [];
+  const bracketsLib = {
+    '(': ')',
+    '[': ']',
+    '{': '}',
+    '<': '>',
+  };
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === '(' || str[i] === '[' || str[i] === '{' || str[i] === '<') {
+      stack.push(str[i]);
+    } else {
+      const last = stack.pop();
+      if (str[i] !== bracketsLib[last]) return false;
+    }
+  }
+  if (stack.length !== 0) return false;
+
+  return true;
 }
 
 /**
@@ -365,8 +385,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 /**
@@ -381,8 +401,18 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const pathesArr = pathes.map((item) => item.split('/'));
+  let common = '';
+  if (pathesArr.every((item) => item[0].startsWith('/'))) {
+    common += '/';
+  }
+  pathesArr[0].forEach((folder) => {
+    if (pathesArr.every((item) => item.includes(folder))) {
+      common += `${folder}/`;
+    }
+  });
+  return common;
 }
 
 /**
@@ -403,8 +433,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  let resultMatrix = [];
+  for (let i = 0; i < m1.length; i += 1) {
+    resultMatrix[i] = [];
+  }
+  for (let i = 0; i < m2[0].length; i += 1) {
+    for (let j = 0; j < m1.length; j += 1) {
+      let m = 0;
+      for (let l = 0; l < m2.length; l += 1) m += m1[j][l] * m2[l][i];
+      resultMatrix[j][i] = m;
+    }
+  }
+  return resultMatrix;
 }
 
 /**
